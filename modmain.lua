@@ -11,7 +11,9 @@ PrefabFiles = {
     "coral_shard",
     "crab",
     "crabhole",
-    "boids"
+    "boids",
+    "seaweed",
+    "bulb_kelp"
 }
 
 modimport("main/strings.lua")
