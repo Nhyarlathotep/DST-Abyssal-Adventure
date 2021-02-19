@@ -41,3 +41,7 @@ end)
 
 AddStategraphActionHandler("wilson", GLOBAL.ActionHandler(GLOBAL.ACTIONS.POPBALLOON, "give"))
 AddStategraphActionHandler("wilson_client", GLOBAL.ActionHandler(GLOBAL.ACTIONS.POPBALLOON, "give"))
+
+AddAction("CRAB_HIDE", "", function(act)
+    return false
+end)
