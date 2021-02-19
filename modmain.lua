@@ -1,11 +1,17 @@
 Assets = {
-    Asset("ANIM", "anim/oxygen.zip"),
+    Asset("ANIM", "anim/oxygen.zip")
 }
 
 PrefabFiles = {
     "anchor_exit",
     "divingbell",
-    "diving_bell_entrance"
+    "diving_bell_entrance",
+    "crates",
+    "coral",
+    "coral_shard",
+    "crab",
+    "crabhole",
+    "boids"
 }
 
 modimport("main/strings.lua")
