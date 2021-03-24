@@ -13,7 +13,10 @@ PrefabFiles = {
     "crabhole",
     "boids",
     "seaweed",
-    "bulb_kelp"
+    "bulb_kelp",
+    "drowned",
+    "chimineafire",
+    "chiminea"
 }
 
 modimport("main/strings.lua")
