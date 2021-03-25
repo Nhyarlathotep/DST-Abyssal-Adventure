@@ -1,6 +1,6 @@
 local assets=
 {
-    Asset("ANIM", "anim/coral.zip")
+    Asset("ANIM", "anim/boids.zip")
 }
 
 local brain = require "brains/boidsbrain"
@@ -11,16 +11,16 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
-    inst.entity:AddSoundEmitter()
+
     local shadow = inst.entity:AddDynamicShadow()
     shadow:SetSize( 1.5, .5 )
-    inst.Transform:SetFourFaced()
+    inst.Transform:SetSixFaced()
 
     MakeCharacterPhysics(inst, 1, 0.5)
 
-    inst.AnimState:SetBank("coral")
-    inst.AnimState:SetBuild("coral")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetBank("boids")
+    inst.AnimState:SetBuild("boids")
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("animal")
     inst:AddTag("prey")

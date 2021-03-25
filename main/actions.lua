@@ -4,7 +4,7 @@ local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 
 AddAction("ENTERBELL", "Refill oxygen in", function(act)
     if act.doer ~= nil and act.target ~= nil and act.doer:HasTag('player') and act.target.components.interactions then
-        --act.target.components.interactions:EnterBell(act.doer)
+        act.target.components.oxygen:DoDelta(60)
         return true
     else
         return false
@@ -64,7 +64,7 @@ AddStategraphState("wilson", GLOBAL.State {
     },
     onexit = function(inst)
         inst:Show()
-        inst.components.interactions:ExitBell(inst)
+        --inst.components.interactions:ExitBell(inst)
         inst.DynamicShadow:Enable(true)
         inst.AnimState:PlayAnimation("run_pst")
         --inst.SoundEmitter:PlaySound("manhole cover sound")
@@ -102,11 +102,12 @@ end)
 AddComponentAction("SCENE", "interactions", function(inst, doer, actions, right)
     if inst.components.interactions then
         if inst.prefab == "diving_bell" then
-            if right then
+            table.insert(actions, GLOBAL.ACTIONS.ENTERBELL)
+            --[[if right then
                 table.insert(actions, GLOBAL.ACTIONS.ENTERBELL)
             else
                 table.insert(actions, GLOBAL.ACTIONS.MIGRATE)
-            end
+            end]]
         elseif inst.prefab == "anchor_exit" then
             table.insert(actions, GLOBAL.ACTIONS.MIGRATE)
         elseif inst.prefab == "balloon" then

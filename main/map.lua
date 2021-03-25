@@ -8,7 +8,19 @@ local GROUND_OCEAN_COLOR = {
 }
 
 AddTile("SAND", 95, "beach", {
-    noise_texture = "levels/textures/noise_sand.tex",
+    noise_texture = "levels/textures/noise_sand_shallow.tex",
+    runsound = "dontstarve/movement/walk_grass", --TODO: change to sand
+    walksound = "dontstarve/movement/walk_grass", --TODO: change to sand
+    snowsound = "dontstarve/movement/run_snow",
+    mudsound = "dontstarve/movement/run_mud",
+    flashpoint_modifier = 0,
+    colors = GROUND_OCEAN_COLOR,
+}, {
+    noise_texture = "levels/textures/mini_noise_beach.tex"
+})
+
+AddTile("SAND_DEEP", 96, "beach", {
+    noise_texture = "levels/textures/noise_sand_deep.tex",
     runsound = "dontstarve/movement/walk_grass", --TODO: change to sand
     walksound = "dontstarve/movement/walk_grass", --TODO: change to sand
     snowsound = "dontstarve/movement/run_snow",
@@ -23,20 +35,20 @@ AddTile("SAND", 95, "beach", {
 --	[ 			   Rooms		    ]	--
 
 modimport("scripts/map/rooms/safe_shallows")
+modimport("scripts/map/rooms/kelp_forest")
 
 
 --	[ 			   Tasks		    ]	--
 
 modimport("scripts/map/tasks/safe_shallows")
+modimport("scripts/map/tasks/kelp_forest")
 
 local function LevelPreInit(level)
-    --[[if level.location == "forest" then
-        table.insert(level.tasks, "safe_shallows")
-    end]]
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
 
         table.insert(level.tasks, "safe_shallows")
+        table.insert(level.tasks, "kelp_forest")
     end
 end
 

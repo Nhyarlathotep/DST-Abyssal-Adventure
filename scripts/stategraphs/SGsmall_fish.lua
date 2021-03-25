@@ -1,10 +1,8 @@
 require("stategraphs/commonstates")
 
-local actionhandlers =
-{}
+local actionhandlers = {}
 
-local events =
-{
+local events = {
     EventHandler("locomote", function(inst)
         if not inst.sg:HasStateTag("busy") then
             local is_moving = inst.sg:HasStateTag("moving")
@@ -22,8 +20,7 @@ local events =
     --CommonHandlers.OnFreeze(),
 }
 
-local states =
-{
+local states = {
     State {
         name = "moving",
         tags = { "moving", "canrotate" },
@@ -38,8 +35,8 @@ local states =
         tags = { "idle" },
         onenter = function(inst)
             inst.Physics:Stop()
-            if not inst.AnimState:IsCurrentAnimation("idle") then
-                inst.AnimState:PlayAnimation("idle", true)
+            if not inst.AnimState:IsCurrentAnimation("walk_loop") then
+                inst.AnimState:PlayAnimation("walk_loop", true)
             end
             inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
         end,
@@ -54,5 +51,5 @@ local states =
 }
 --CommonStates.AddFrozenStates(states, LandFlyingCreature, RaiseFlyingCreature)
 
-return StateGraph("boids", states, events, "idle")
+return StateGraph("small_fish", states, events, "idle")
 

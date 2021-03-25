@@ -12,8 +12,11 @@ PrefabFiles = {
     "crab",
     "crabhole",
     "boids",
-    "seaweed",
-    "bulb_kelp",
+    "hunting_shark",
+    "kelp_plant",
+    "swordfish",
+    "dogfish",
+    "small_fish",
     "drowned",
     "chimineafire",
     "chiminea",
@@ -52,8 +55,6 @@ AddPrefabPostInit("anchor", function(inst)
     end
 end)
 
--- check deployable.lua pour empecher de placer des trucs dans l'eau
-
 local resolvefilepath = GLOBAL.resolvefilepath
 table.insert(Assets, Asset("IMAGE", "images/colour_cubes/sw_mild_day_cc.tex"))
 --table.insert(Assets, Asset("IMAGE", "images/colour_cubes/SW_wet_dusk_cc.tex"))
@@ -89,6 +90,44 @@ AddComponentPostInit("playervision", function(self)
         end
     end
 end)
+
+
+----------------------------------------------------------------
+local function CanBuildAtPoint(pt)
+    --TODO ADD OTHER TILES AND ALLOWED PREFABS
+    if (GLOBAL.TheWorld.Map:GetTile(GLOBAL.TheWorld.Map:GetTileCoordsAtPoint(pt:Get())) == GROUND.SAND) then
+        return false
+    end
+    return true
+end
+
+local function BuilderPostInit(self)
+    local OldCanBuildAtPoint = self.CanBuildAtPoint
+    local OldMakeRecipeAtPoint = self.MakeRecipeAtPoint
+
+    self.CanBuildAtPoint = function(self, pt, recipe, ...)
+        return OldCanBuildAtPoint(self, pt, recipe, ...) and CanBuildAtPoint(pt)
+    end
+
+    self.MakeRecipeAtPoint = function(self, recipe, pt, ...)
+        return OldMakeRecipeAtPoint(self, recipe, pt, ...) and CanBuildAtPoint(pt)
+    end
+end
+
+AddComponentPostInit("builder", BuilderPostInit) --Server
+AddClassPostConstruct("components/builder_replica", BuilderPostInit) --Client
+
+local function DeployablePostInit(self)
+    local OldCanDeploy = self.CanDeploy
+
+    self.CanDeploy = function(self, pt, mouseover, deployer, ...)
+        return OldCanDeploy(self, pt, mouseover, deployer, ...) and CanBuildAtPoint(pt)
+    end
+end
+
+AddComponentPostInit("deployable", DeployablePostInit) --Server
+AddClassPostConstruct("components/inventoryitem_replica", DeployablePostInit) --Client
+----------------------------------------------------------------
 
 local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 local PlayerVision = GLOBAL.require("components/playervision")

@@ -19,12 +19,11 @@ local function fn()
     MakeObstaclePhysics(inst, 0.8)
     inst.AnimState:SetBank("anchor_exit")
     inst.AnimState:SetBuild("anchor_exit")
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst.MiniMapEntity:SetIcon("pighouse.png")
 
     inst:AddTag("structure")
-
-    inst.AnimState:PlayAnimation("idle", true)
 
     inst.entity:SetPristine()
 

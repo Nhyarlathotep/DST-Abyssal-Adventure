@@ -1,6 +1,6 @@
 AddTask("safe_shallows", {
     locks = {},
-    keys_given = { KEYS.ISLAND_DEEP },
+    keys_given = { KEYS.ISLAND_DEEP_TIER1 },
     region_id = "islanddeep",
     level_set_piece_blocker = true,
     room_tags = { "RoadPoison", "deeparea", "not_mainland" },
