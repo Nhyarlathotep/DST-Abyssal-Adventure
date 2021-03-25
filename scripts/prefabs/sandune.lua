@@ -55,6 +55,13 @@ end
 
 local function onload(inst, data)
     inst.state = data.state
+    if (inst.state == 1) then
+        inst.components.pickable:SetUp("oceansand", 0)
+        inst.AnimState:PushAnimation("med")
+    elseif (inst.state == 0) then
+        inst.components.pickable:SetUp("oceansand", 10)
+        inst.AnimState:PushAnimation("low")
+    end
 end
 
 local function onsave(inst, data)
