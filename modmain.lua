@@ -16,7 +16,9 @@ PrefabFiles = {
     "bulb_kelp",
     "drowned",
     "chimineafire",
-    "chiminea"
+    "chiminea",
+    "sandune",
+    "sandonground"
 }
 
 modimport("main/strings.lua")

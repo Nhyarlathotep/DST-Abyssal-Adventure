@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Atlas>
+    <Texture filename="oceansand.tex" />
+    <Elements>
+        <Element name="oceansand.tex" u1="0" u2="1" v2="0" v1="1"/>
+    </Elements>
+</Atlas>
